@@ -1,0 +1,6 @@
+{
+  "name": "VectraTrack",
+  "description": "Real-time AI object detection, localization, and multi-object motion tracking with customizable overlay, stats dashboard, and purple neon theme.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
