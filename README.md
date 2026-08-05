@@ -72,6 +72,42 @@ The resulting assets will be compiled directly in the `/dist` output directory.
 
 ---
 
+## 🐍 ML Backend v2.0 (Python — `ml_backend/`)
+
+A full Python-based Multi-Object Tracking pipeline has been added alongside the browser frontend.
+
+### Features
+| Feature | Details |
+|---|---|
+| **Custom SORT Tracker** | Built from scratch — Kalman Filter + Hungarian Algorithm bipartite matching (`custom_tracker.py`) |
+| **Trajectory Prediction** | Neon past trails (60 frames) + dashed future projection (15 frames) via Kalman velocity states |
+| **Streamlit Web App** | Upload video → choose algorithm → view analytics → download telemetry CSV (`app.py`) |
+| **Benchmark Mode** | Run ByteTrack / BoT-SORT / Custom SORT on the same video and compare FPS |
+| **CLI Tracker** | Real-time webcam / video tracking from the terminal (`tracker.py`) |
+| **Telemetry Export** | Frame-level CSV: ID, class, bounding box, speed (px/frame), age |
+
+### Algorithms
+- **Kalman Filter** — 7D state vector `[cx, cy, s, r, vx, vy, vs]`, predict + update steps
+- **Hungarian Algorithm** — `scipy.optimize.linear_sum_assignment` for optimal assignment
+- **IoU metric** — detection-to-track association gate
+
+### Quick Start
+```bash
+cd ml_backend
+pip install -r requirements.txt
+
+# Web App
+streamlit run app.py
+
+# CLI — Custom SORT on webcam
+python tracker.py --tracker custom --trail --predict
+
+# CLI — ByteTrack on video file, save output
+python tracker.py --source video.mp4 --tracker bytetrack --save output.mp4
+```
+
+---
+
 ## 📄 License & Attribution
 
 This project is licensed under the Apache-2.0 License. All visual components, state-estimation libraries, and modules are structured modularly to promote simple drops, audits, or scaling.
