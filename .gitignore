@@ -6,3 +6,14 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.pt
+*.weights
+*.onnx
